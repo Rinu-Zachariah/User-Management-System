@@ -1,0 +1,25 @@
+@import '~antd/dist/antd.css';
+
+#root, .App, .main-container {
+  height: 100%;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loader-row, .unauthorized-access {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.unauthorized-access {
+  font-size: 24px;
+  font-weight: bold;
+}
+/** Common classes used across the application **/
+.column-element-padding {
+  padding: 5px 0px;
+}

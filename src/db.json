@@ -1,0 +1,64 @@
+var userDetails = 
+{
+	"user": [
+	{
+		"key": 1,
+		"group": "G1",
+		"created_at": "2017-09-15T11:50:20.000Z",
+		"updated_at": "2017-09-19T14:58:21.000Z",
+		"name": "XYZ",
+		"address": "Mnjerhsfkjhdsf",
+		"is_valid": true
+	},
+	{
+		"key": 2,
+		"group": "G2",
+		"created_at": "2017-09-15T11:41:59.000Z",
+		"updated_at": "2017-09-15T11:41:59.000Z",
+		"name": "ABC",
+		"address": "gsdgsfdsdhewrek",
+		"email":"asd@mail.com",
+		"is_valid": true
+	},
+	{
+		"key": 3,
+		"group": "G1",
+		"created_at": "2017-09-15T11:34:06.000Z",
+		"updated_at": "2017-09-15T11:34:06.000Z",
+		"name": "DEF",
+		"address": "WFevehrhwnmsfbchbfds",
+		"email":"das@mail.com",
+		"is_valid": false
+	},
+	{
+		"key": 4,
+		"group": "G4",
+		"created_at": "2017-09-15T11:29:40.000Z",
+		"updated_at": "2017-09-15T11:29:40.000Z",
+		"name": "MNO",
+		"address": "fsfvhsbhsfdhsdhshd",
+		"email":"as@mail.com",
+		"is_valid": false
+	},
+	{
+		"key": 5,
+		"group": "G1",
+		"created_at": "2017-09-15T10:59:58.000Z",
+		"updated_at": "2017-09-15T11:01:40.000Z",
+		"name": "PQA",
+		"address": "Abherehruhe",
+		"email":"we@mail.com",
+		"is_valid": true
+	},
+	{
+		"key": 6,
+		"group": "G2",
+		"created_at": "2017-09-15T10:59:58.000Z",
+		"updated_at": "2017-09-15T11:01:40.000Z",
+		"name": "GER",
+		"address": "ojrierjhejhrjher",
+		"email":"fer@mail.com",
+		"is_valid": true
+	}
+	]
+}
