@@ -4,7 +4,7 @@ import { Button, Modal, Form, Input, Row, Col, message, Select, Spin } from 'ant
 import './GroupModal.css';
 import FormData from 'form-data';
 const FormItem = Form.Item;
-
+const Option = Select.Option;
 class GroupModal extends Component {
   constructor() {
     super();
@@ -70,6 +70,7 @@ class GroupModal extends Component {
 
   fetchUser = (value) => {
     this.lastFetchId += 1;
+    var dataFetched = [];
     const fetchId = this.lastFetchId;
     this.setState({ data: [], fetching: true });
     fetch('https://randomuser.me/api/?results=5')
@@ -83,8 +84,9 @@ class GroupModal extends Component {
         value: user.login.username,
       }));
       this.setState({ data, fetching: false });
+      dataFetched = data;
     });
-    this.setState({ usernames: data });
+    this.setState({ usernames: dataFetched });
   }
 
   getGroupData = (booleanValue, secondparam) => {
@@ -94,6 +96,7 @@ class GroupModal extends Component {
   render() {
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const { fetching, data, value } = this.state;
     
     return (
       <div>
@@ -131,8 +134,7 @@ class GroupModal extends Component {
             </Row>
             <Row className="content heightAdjustFormElements" type="flex" align="middle" justify="space-around">
               <Col className="column-element-padding" xs={{span: 24, offset: 0}} sm={{span: 24, offset: 0}} md={{span: 24, offset: 0}}>
-                <FormItem label={<span>Users</span>} 
-                    layout={formLayout} >
+                <FormItem label={<span>Users</span>} >
                     {getFieldDecorator('users', {
                       rules: [{ 
                       required: true,                  

@@ -18,12 +18,16 @@ class Search extends Component {
   };
 
   handleChange(e) {
+    this.state.searchString = e.target.value;
+    let valuesData = this.props.valuesData;
+    console.log(valuesData);
     if(this.state.searchString.length > 0){
       const data = valuesData;
       let searchString = this.state.searchString.trim().toLowerCase();
-      valuesData = valuesData.filter(function(l){
+      valuesData = valuesData.filter(function(l){;
         return(l.name.toLowerCase().match(searchString));
       });
+      console.log(valuesData)
     }
   }
 
@@ -31,7 +35,7 @@ class Search extends Component {
     let state = this.state;
     return (
       <div>
-        <input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
+        <Input className="form-control" onChange={this.handleChange} placeholder="Search" />,
       </div>
     );
   }

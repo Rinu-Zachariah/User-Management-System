@@ -6,11 +6,15 @@ import GroupModal from '../ModalForm/GroupModal';
 import ModalPopUp from '../ModalForm/ModalPopUp';
 import Search from '../Search/Search';
 import Divider from '../Divider/Divider';
+import PropTypes from 'prop-types';
+import jsonData from '../../db.json';
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
+
+console.log(jsonData);
 
 const EditableCellTextArea = ({ editable, value, onChange }) => (
   <div>
@@ -47,13 +51,12 @@ const EditableMultiSelect = ({ editable, value, onChange }) => (
         labelInValue
         value={value}
         placeholder="Select users"
-        notFoundContent={fetching ? <Spin size="small" /> : null}
         filterOption={false}
         onSearch={this.fetchUser}
         onChange={this.changeUserHandling}
         style={{ width: '100%' }}
       >
-        {data.map(d => <Option key={d.value}>{d.text}</Option>)}
+       {value.map(d => <Option key={d.value}>{d.text}</Option>)} 
       </Select> 
       : value
     }
@@ -82,20 +85,24 @@ class UserDetails extends Component {
     .catch(error => {
       message.error('Something went wrong, please refresh and try again');
     })
+    state.userData = jsonData.user;
+    state.groupData = jsonData.group;
+    state.loading = false;
   }
 
   state = {
     loading: false, //for displaying the loading icon, and disabling the form items
     file: '',
+    fetching: false,
     groupData: [],
     userData: [],
     groupDataConfiguration: [{
       title: 'Name',
       dataIndex: 'name',
-      width: 250,
+      width: 50,
       sorter: (a, b) => {
-        let assetA = a.asset.toUpperCase();
-        let assetB = b.asset.toUpperCase();
+        let assetA = a.name.toUpperCase();
+        let assetB = b.name.toUpperCase();
         if (assetA < assetB) {
           return -1;
         }
@@ -108,17 +115,17 @@ class UserDetails extends Component {
     },{
       title: 'ID',
       dataIndex: 'id',
-      width: 180,
+      width: 50,
       render: (text, record) => this.renderGroupCols(text, record, 'id')
     },{
       title: 'Users',
       dataIndex: 'users',
-      width: 180,
+      width: 50,
       render: (text, record) => this.renderMultiSelect(text, record, 'users')
     }, {
       title: 'Action',
       dataIndex: 'operation',
-      width: 180,
+      width: 50,
       render: (text, record) => {
         const { editable } = record;
         return (
@@ -161,10 +168,16 @@ class UserDetails extends Component {
       dataIndex: 'group',
       width: 250,
       render: (text, record) => this.renderSelectColumn(text, record, 'group'),
-      filters: this.state.userData.map((arr, index) => ({
-        text: arr.group,
-        value: arr.group,
-      }))),
+      filters: [{
+        text: 'G1',
+        value: 'G1',
+      }, {
+        text: 'G2',
+        value: 'G2',
+      }, {
+        text: 'G3',
+        value: 'G3',
+      }],
       onFilter: (value, record) => record.group.indexOf(value) === 0,
     }, {
       title: 'Address',
@@ -239,7 +252,7 @@ class UserDetails extends Component {
       axios({
         url: 'groupAddUpdate/'+target.id,
         method: 'PUT',
-        data: dataForm
+        data: target
       }).then(response => {
         delete target.editable;
         this.setState({ groupData: newData });
@@ -409,7 +422,7 @@ class UserDetails extends Component {
             <Divider text={'User Data'}/>
             <Row className="content" type="flex" align="middle" justify="space-around">
               <Col className="column-element-padding" xs={{span: 24, offset: 0}} sm={{span: 24, offset: 0}} md={{span: 8, offset: 16}}>
-                <Search valuesData=state.userData />
+                <Search valuesData />
               </Col>
             </Row>
             <Row className="content">
@@ -418,7 +431,7 @@ class UserDetails extends Component {
                   bordered={ true }
                   pagination={ false }
                   columns={state.UserdataCheckTable}
-                  dataSource={state.userData}
+                  dataSource={this.props.valuesData}
                   rowKey="key"
                   loading={state.loading}
                   scroll={{ y: 360 }} />
@@ -436,7 +449,7 @@ class UserDetails extends Component {
               </Row>
               <Row className="content" type="flex" align="middle" justify="space-around">
                 <Col className="column-element-padding" xs={{span: 24, offset: 0}} sm={{span: 24, offset: 0}} md={{span: 8, offset: 16}}>
-                  <Search valuesData=state.groupData />
+                  <Search valuesData />
                 </Col>
               </Row>
               <Row className="content">
@@ -447,8 +460,7 @@ class UserDetails extends Component {
                     columns={state.groupDataConfiguration}
                     dataSource={state.groupData}
                     rowKey="group_id"
-                    loading={state.loading}
-                    scroll={{ x: 2500, y: 360 }} />
+                    loading={state.loading} />
                 </Col>
               </Row>
             </Form>
@@ -458,4 +470,13 @@ class UserDetails extends Component {
     );
   }
 }
+
+UserDetails.propTypes = {
+  valuesData: PropTypes.array
+};
+
+UserDetails.defaultProps = {
+  valuesData: jsonData.user
+};
+
 export default Form.create()(UserDetails);

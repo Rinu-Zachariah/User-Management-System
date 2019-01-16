@@ -1,4 +1,4 @@
-var userDetails = 
+
 {
 	"user": [
 	{
@@ -59,6 +59,23 @@ var userDetails =
 		"address": "ojrierjhejhrjher",
 		"email":"fer@mail.com",
 		"is_valid": true
+	}
+	],
+	"group":[
+	{
+		"id": 1,
+		"name":"New Group",
+		"users": ["G1", "G2", "G3", "G5"]
+	},
+	{
+		"id": 2,
+		"name":"New Group",
+		"users": ["G1", "G2", "G3", "G5"]
+	},
+	{
+		"id": 3,
+		"name":"ABCNew Group",
+		"users": ["G1", "G2", "G3", "G5"]
 	}
 	]
 }

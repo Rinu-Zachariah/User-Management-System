@@ -8,7 +8,7 @@ import routes from './Route';
 
 ReactDOM.render(
 	<LocaleProvider locale={enUS}>
-	<Router routes={routes} />
+		<Router routes={routes} />
 	</LocaleProvider>, 
 	document.getElementById('root')
 );

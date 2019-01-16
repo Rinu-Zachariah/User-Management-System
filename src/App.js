@@ -10,10 +10,10 @@ class App extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	loading: true,
-			authorizedAccess: false
+    	loading: false,
+			authorizedAccess: true
     };
-    this.validateUsernameAuthorization = this.validateUsernameAuthorization.bind(this);
+    // this.validateUsernameAuthorization = this.validateUsernameAuthorization.bind(this);
 	}
 
 	componentWillMount() {
@@ -25,36 +25,35 @@ class App extends Component {
       'MAIL':'test_user@mail.com',
     };
     message.config({ duration: 3 });
-    
-    axios({	
-     		url: 'authenticate',
-     		method: 'GET'
-    })
-    .then(response => {
-      axios.defaults.headers['Authenticate'] = response.data.authenticate;
-      axios({ 
-        url: 'users/is_valid',
-        method: 'GET'
-     	}).then(response => {
-     		this.validateUsernameAuthorization(response.data.is_valid);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    // axios({	
+    //  		url: 'authenticate',
+    //  		method: 'GET'
+    // })
+    // .then(response => {
+    //   axios.defaults.headers['Authenticate'] = response.data.authenticate;
+    //   axios({ 
+    //     url: 'users/is_valid',
+    //     method: 'GET'
+    //  	}).then(response => {
+    //  		this.validateUsernameAuthorization(response.data.is_valid);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
   }
 
-  validateUsernameAuthorization = (valid) => {
-		let state = this.state;
-		if (valid) {	
-	  	state.authorizedAccess = true;
-	  }
-	  state.loading = false;
- 		this.setState(state);
-	}
+ //  validateUsernameAuthorization = (valid) => {
+	// 	let state = this.state;
+	// 	if (valid) {	
+	//   	state.authorizedAccess = true;
+	//   }
+	//   state.loading = false;
+ // 		this.setState(state);
+	// }
 
   render() {
   	let state = this.state;

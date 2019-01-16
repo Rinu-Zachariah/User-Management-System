@@ -1,8 +1,7 @@
 {
-  "name": "user-management-system",
-  "version": "1.0.0",
-  "description": "To handle user data",
-  "main": "index.js",
+  "name": "user-management",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "antd": "^2.13.11",
     "axios": "^0.17.1",
@@ -22,6 +21,9 @@
     "build_dev": "env-cmd .env.development react-scripts build",
     "test": "jest --coverage",
     "eject": "react-scripts eject"
+  },
+  "theme": {
+    "primary-color": "#032B5E"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.12.0",
@@ -45,14 +47,4 @@
       ".*": "<rootDir>/node_modules/jest-css-modules"
     }
   }
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Rinu-Zachariah/User-Management-System.git"
-  },
-  "author": "Rinu Zachariah",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Rinu-Zachariah/User-Management-System/issues"
-  },
-  "homepage": "https://github.com/Rinu-Zachariah/User-Management-System#readme"
 }
