@@ -69,6 +69,7 @@ class UserDetails extends Component {
     this.groupDelete = this.groupDelete.bind(this);
     this.userDelete = this.userDelete.bind(this);
     this.getCallback = this.getCallback.bind(this);
+    this.gotResults = this.gotResults.bind(this);
   }
   componentDidMount() {
     let state = this.state;
@@ -403,6 +404,14 @@ class UserDetails extends Component {
       }
     } 
   }  
+  gotResults = (valuesData, boolValue) => {
+    if(boolValue === true){
+      this.setState({ userData : valuesData });
+    }
+    else
+      this.setState({ groupData : valuesData });
+    
+  }
   render() {
     let state = this.state;
 
@@ -422,7 +431,7 @@ class UserDetails extends Component {
             <Divider text={'User Data'}/>
             <Row className="content" type="flex" align="middle" justify="space-around">
               <Col className="column-element-padding" xs={{span: 24, offset: 0}} sm={{span: 24, offset: 0}} md={{span: 8, offset: 16}}>
-                <Search valuesData />
+                <Search valuesCheck={this.props.valuesData}  getResults={this.gotResults}/>
               </Col>
             </Row>
             <Row className="content">
@@ -431,7 +440,7 @@ class UserDetails extends Component {
                   bordered={ true }
                   pagination={ false }
                   columns={state.UserdataCheckTable}
-                  dataSource={this.props.valuesData}
+                  dataSource={state.userData}
                   rowKey="key"
                   loading={state.loading}
                   scroll={{ y: 360 }} />
@@ -449,7 +458,7 @@ class UserDetails extends Component {
               </Row>
               <Row className="content" type="flex" align="middle" justify="space-around">
                 <Col className="column-element-padding" xs={{span: 24, offset: 0}} sm={{span: 24, offset: 0}} md={{span: 8, offset: 16}}>
-                  <Search valuesData />
+                  <Search valuesCheck={this.props.groupsData}  getResults={this.gotResults} />
                 </Col>
               </Row>
               <Row className="content">
@@ -472,11 +481,13 @@ class UserDetails extends Component {
 }
 
 UserDetails.propTypes = {
-  valuesData: PropTypes.array
+  valuesData: PropTypes.array,
+  groupsData : PropTypes.array
 };
 
 UserDetails.defaultProps = {
-  valuesData: jsonData.user
+  valuesData: jsonData.user,
+  groupsData : jsonData.group
 };
 
 export default Form.create()(UserDetails);

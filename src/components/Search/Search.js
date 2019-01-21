@@ -19,16 +19,28 @@ class Search extends Component {
 
   handleChange(e) {
     this.state.searchString = e.target.value;
-    let valuesData = this.props.valuesData;
-    console.log(valuesData);
+    let valuesData = this.props.valuesCheck;
+    let newValuesData = [];
+    let boolValue = true;
+
     if(this.state.searchString.length > 0){
       const data = valuesData;
       let searchString = this.state.searchString.trim().toLowerCase();
-      valuesData = valuesData.filter(function(l){;
-        return(l.name.toLowerCase().match(searchString));
+      newValuesData = valuesData.filter(function(l){
+        if(l.hasOwnProperty("key")){
+          boolValue = true;
+          return(l.name.toLowerCase().match(searchString) || l.address.toLowerCase().match(searchString));
+        }
+        else{
+          boolValue = false;
+          return(l.name.toLowerCase().match(searchString));
+        }
       });
-      console.log(valuesData)
     }
+    else{
+      newValuesData = this.props.valuesCheck;
+    }
+    this.props.getResults(newValuesData, boolValue);
   }
 
   render() {
